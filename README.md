@@ -12,6 +12,6 @@ for test files in android emulator
 - node.js
 - (androidjs-builder)[https://android-js.github.io/]
 
-# How to install only apk files
+# How to install only apk file
 
 just download apk file in dist folder
