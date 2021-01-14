@@ -2,7 +2,7 @@
     "version": "1.0.0",
     "name": "youtube-dl-downloader-app",
     "app-name": "youtube-dl-downloader-app",
-    "package-name": "webview",
+    "package-name": "udl",
     "project-type": "webview",
     "icon": "./assets/icon/icon.png",
     "dist-path": "./dist",
