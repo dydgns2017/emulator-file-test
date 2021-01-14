@@ -18,7 +18,8 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "androidjs": "^2.0.2"
+        "androidjs": "^2.0.2",
+        "youtube-dl": "^3.1.0"
     },
     "project-name": "youtube-dl-downloader-app",
     "theme": {
