@@ -7,7 +7,9 @@
     "icon": "./assets/icon/icon.png",
     "dist-path": "./dist",
     "permission": [
-        "android.permission.INTERNET"
+        "android.permission.INTERNET",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_EXTERNAL_STORAGE"
     ],
     "description": "",
     "main": "main.js",
@@ -18,7 +20,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "androidjs": "^2.0.2",
+        "androidjs": "^2.0.4",
         "youtube-dl": "^3.1.0"
     },
     "project-name": "youtube-dl-downloader-app",

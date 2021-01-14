@@ -26,6 +26,10 @@
         reType
       </div>
     </div>
+    <input type='text' id="test">
+    <div onclick="test();" class="btn check" style="background-color: dodgerblue; margin-right: 15px;">
+      Download
+    </div>
   </section>
   <!-- loading modal -->
   <div class="loading_modal" style="display : none">
@@ -40,6 +44,17 @@
 <script>
   let mp4_link = document.querySelector("#mp4_download_link");
   let mp3_link = document.querySelector("#mp3_download_link");
+
+  function test() {
+    let test = document.querySelector('#test');
+    let data = app.getPath('movies') + "|" + test.value;
+    front.send('test', data);
+  }
+
+  front.on('test', (msg) => {
+    alert(msg);
+  });
+
   function download() {
     let data;
     // inspect url
@@ -52,12 +67,9 @@
         return;
       }
       // send link storage|mp4|mp3
-      data = app.getPath('movies') +
-        "|" + app.getPath('music') +
-        "|" + mp4_link.value +
-        "|" + mp3_link.value;
+      data = app.getPath('movies') + "|" + app.getPath('music') + "|" + mp4_link.value + "|" + mp3_link.value;
       loading_modal('on');
-      front_send('download-mp34', data);
+      front.send('download-mp34', data);
       return;
     }
     if (mp4_link.value != '') {
@@ -65,10 +77,9 @@
         alert("your url was wrong");
         return;
       }
-      data = app.getPath('movies') +
-        "|" + mp4_link.value;
+      data = app.getPath('movies') + "|" + mp4_link.value;
       loading_modal('on');
-      front_send('download-mp4', data);
+      front.send('download-mp4', data);
       return;
     }
     if (mp3_link.value != '') {
@@ -76,19 +87,19 @@
         alert("your url was wrong");
         return;
       }
-      data = app.getPath('music') +
-        "|" + mp4_link.value;
+      data = app.getPath('music') + "|" + mp4_link.value;
       loading_modal('on');
-      front_send('download-mp3', data);
+      front.send('download-mp3', data);
       return;
     }
     alert("ERROR : link is empty or your url is invaild");
   }
 
-  front_on('download-return', (msg) => {
+    front.on('download-return', (msg) => {
     loading_modal('off');
     alert('download ' + msg);
   });
+
   function loading_modal(msg) {
     let loading_modal = document.querySelector('.loading_modal');
     if (msg == 'on')

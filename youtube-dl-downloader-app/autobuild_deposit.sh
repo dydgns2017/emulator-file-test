@@ -12,10 +12,8 @@ nohup ./emulator.exe @Nexus_7_2012_API_30 &
 
 ## androidjs build
 cd $devFolder
-androidjs build --force --debug
+androidjs build --force --release
 
 ## deposit
 cd $devTools
-./adb.exe -e install devFolder/dist/youtube-dl-downloader-app.apk
-
-cd $devFolder
+./adb.exe -e install $devFolder/dist/youtube-dl-downloader-app.apk

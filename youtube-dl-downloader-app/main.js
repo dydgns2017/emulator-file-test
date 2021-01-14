@@ -10,8 +10,9 @@ const youtubedl = require('youtube-dl')
 // if download result is ok return to service
 // back.send('download-return', result);
 
-back.on('download-mp34', (data)=>{
-	let [movie_dir, music_dir, link_mp4, link_mp3] = data.split("|");
+// download-mp34 : download mp3, mp4 files
+back.on('download-mp34', (datag)=>{
+	let [movie_dir, music_dir, link_mp4, link_mp3] = datag.split("|");
 	let data;
 	// download
 	data = movie_dir + "|" + link_mp4;
@@ -22,18 +23,21 @@ back.on('download-mp34', (data)=>{
 	});
 });
 
-back.on('download-mp3'), (data)=>{
+// download-mp3  : download mp3 file
+back.on('download-mp3', (data)=>{
 	// 21, mp3
 	download(data, 21, ()=>{
 		back.send('download-return', 'success');
 	});
-}
-back.on('download-mp4'), (data)=>{
+});
+
+// download-mp4  : download mp4 file
+back.on('download-mp4', (data)=>{
 	// 18, mp4
 	download(data, 18, ()=>{
 		back.send('download-return', 'success');
 	});
-}
+});
 
 function download(data, format_num, callback){
 	let [dir, link] = data.split("|");
