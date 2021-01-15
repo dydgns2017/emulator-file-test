@@ -10,7 +10,7 @@ for test files in android emulator
 - andorid studio emulator
 - window 10
 - node.js
-- (androidjs-builder)[https://android-js.github.io/]
+- [androidjs-builder](https://android-js.github.io/)
 
 # How to install only apk file
 
