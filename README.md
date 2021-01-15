@@ -14,4 +14,4 @@ for test files in android emulator
 
 # How to install only apk file
 
-just download apk file in dist folder
+just download apk file in [dist folder](https://github.com/dydgns2017/emulator-file-test/tree/main/youtube-dl-downloader-app/dist)
