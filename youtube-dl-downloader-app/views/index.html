@@ -47,11 +47,13 @@
 
   function test() {
     let test = document.querySelector('#test');
-    let data = app.getPath('movies') + "|" + test.value;
+    let data = app.getPath('movies');
+    loading_modal('on');
     front.send('test', data);
   }
 
   front.on('test', (msg) => {
+    loading_modal('off');
     alert(msg);
   });
 
@@ -87,14 +89,13 @@
         alert("your url was wrong");
         return;
       }
-      data = app.getPath('music') + "|" + mp4_link.value;
+      data = app.getPath('music') + "|" + mp3_link.value;
       loading_modal('on');
       front.send('download-mp3', data);
       return;
     }
     alert("ERROR : link is empty or your url is invaild");
   }
-
     front.on('download-return', (msg) => {
     loading_modal('off');
     alert('download ' + msg);

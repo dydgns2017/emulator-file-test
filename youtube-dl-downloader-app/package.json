@@ -21,7 +21,7 @@
     "license": "ISC",
     "dependencies": {
         "androidjs": "^2.0.4",
-        "youtube-dl": "^3.1.0"
+        "ytdl-core": "^4.4.3"
     },
     "project-name": "youtube-dl-downloader-app",
     "theme": {
