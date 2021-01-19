@@ -1,6 +1,11 @@
 const back = require('androidjs').back;
 const fs = require('fs');
 const ytdl = require('ytdl-core');
+require('magic-globals');
+
+function error_log(msg) {
+	back.send('error-log', msg);
+}
 
 // service define
 // download-mp34 : download mp3, mp4 files
@@ -39,27 +44,21 @@ back.on('download-mp4', (data)=>{
 	});
 });
 
-// function download(data, format_num, callback){
-// 	let [dir, link] = data.split("|");
-// 	let format_ext = (format_num == 21) ? '.mp3' : '.mp4';
-// 	let ytl = youtubedl(link, ['--format=' + format_num], { cwd: dir + '/'});
-//   youtubedl.getInfo(link, (err, info)=>{
-//     if ( err ) throw err;
-//     // start download
-//     ytl.pipe(fs.createWriteStream(info._filename + format_ext));
-//   });
-// 	// end download
-// 	ytl.on('end', function() {
-// 		if ( callback != null )
-// 			callback();
-//   });
-// }
-
-back.on('test', (dir)=> {
-	ytdl("https://www.youtube.com/watch?v=QnL5P0tFkwM", {
-		format: 'mp4'
-	}).pipe(fs.createWriteStream(dir + '/myvideo.mp4'
-	)).on('finish', ()=>{
-		back.send('test', 'success');
-	});
-});
+function download(data, format_num, callback) {
+	let [dir, link] = data.split("|");
+	let format_ext = (format_num == 21) ? 'mp3' : 'mp4';
+	try {
+		ytdl.getInfo(link).then(info=>{
+			let fname = info.videoDetails.title.replace('/', '').replace('|', '').toString('utf8');
+			let store_path = `${dir}/${fname}.${format_ext}`;
+			error_log(store_path);
+			ytdl(link, { format: format_ext })
+				.pipe(fs.createWriteStream(`${dir}/${fname}.${format_ext}`))
+				.on('finish', () => {
+					return callback();
+			});
+		});
+	} catch (error) {
+		error_log(`${error} | ${__line}`);
+	}
+}

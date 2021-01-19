@@ -26,10 +26,6 @@
         reType
       </div>
     </div>
-    <input type='text' id="test">
-    <div onclick="test();" class="btn check" style="background-color: dodgerblue; margin-right: 15px;">
-      Download
-    </div>
   </section>
   <!-- loading modal -->
   <div class="loading_modal" style="display : none">
@@ -44,18 +40,6 @@
 <script>
   let mp4_link = document.querySelector("#mp4_download_link");
   let mp3_link = document.querySelector("#mp3_download_link");
-
-  function test() {
-    let test = document.querySelector('#test');
-    let data = app.getPath('movies');
-    loading_modal('on');
-    front.send('test', data);
-  }
-
-  front.on('test', (msg) => {
-    loading_modal('off');
-    alert(msg);
-  });
 
   function download() {
     let data;
@@ -96,7 +80,8 @@
     }
     alert("ERROR : link is empty or your url is invaild");
   }
-    front.on('download-return', (msg) => {
+  // download-return
+  front.on('download-return', (msg) => {
     loading_modal('off');
     alert('download ' + msg);
   });
@@ -115,5 +100,10 @@
       i.value = '';
     });
   }
+
+  front.on('error-log', (msg)=>{
+    alert(`error : ${msg}`);
+    console.log(`error : ${msg}`);
+  });
 </script>
 </html>
