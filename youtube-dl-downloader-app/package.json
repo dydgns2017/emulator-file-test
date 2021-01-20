@@ -26,6 +26,9 @@
     },
     "project-name": "youtube-dl-downloader-app",
     "theme": {
-        "fullScreen": true
+        "fullScreen": false,
+        "colorAccent": "#1976D2",
+        "colorPrimary": "#1976D2",
+        "colorPrimaryDark": "#1976D2"
     }
 }

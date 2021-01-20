@@ -48,12 +48,12 @@ function download(data, format_num, callback) {
 	let [dir, link] = data.split("|");
 	let format_ext = (format_num == 21) ? 'mp3' : 'mp4';
 	try {
+		error_log(dir);
 		ytdl.getInfo(link).then(info=>{
 			let fname = info.videoDetails.title.replace('/', '').replace('|', '').toString('utf8');
 			let store_path = `${dir}/${fname}.${format_ext}`;
-			error_log(store_path);
 			ytdl(link, { format: format_ext })
-				.pipe(fs.createWriteStream(`${dir}/${fname}.${format_ext}`))
+				.pipe(fs.createWriteStream(store_path))
 				.on('finish', () => {
 					return callback();
 			});

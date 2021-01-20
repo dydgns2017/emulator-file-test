@@ -8,7 +8,7 @@ devTools=$HOME/AppData/Local/Android/Sdk/platform-tools/
 ## emualtor execute
 # change here if you want to use a different emulator
 cd $emuFolder 
-nohup ./emulator.exe @Nexus_7_2012_API_30 &
+nohup ./emulator.exe -avd Nexus_7_2012_API_30 -dns-server 8.8.8.8 &
 
 ## androidjs build
 cd $devFolder
