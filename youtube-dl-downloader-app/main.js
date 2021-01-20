@@ -46,17 +46,25 @@ back.on('download-mp4', (data)=>{
 
 function download(data, format_num, callback) {
 	let [dir, link] = data.split("|");
+	// for local node test
+	// if (dir == 'window-test')
+	//   dir = process.cwd();
+
 	let format_ext = (format_num == 21) ? 'mp3' : 'mp4';
 	try {
-		error_log(dir);
-		ytdl.getInfo(link).then(info=>{
+		ytdl.getInfo(link).then((info, err) => {
+			if (err) error_log(err + "|" + __line);
+			back.send('download-start', 'msg');
 			let fname = info.videoDetails.title.replace('/', '').replace('|', '').toString('utf8');
-			let store_path = `${dir}/${fname}.${format_ext}`;
-			ytdl(link, { format: format_ext })
-				.pipe(fs.createWriteStream(store_path))
-				.on('finish', () => {
-					return callback();
+			let store = fs.createWriteStream(`${dir}/${fname}.${format_ext}`);
+			store.once('error', (err) => {
+				error_log(err + "|" + "__line");
 			});
+			ytdl(link, { format: format_ext })
+				.pipe(store)
+				.once('finish', () => {
+					return callback();
+				});
 		});
 	} catch (error) {
 		error_log(`${error} | ${__line}`);

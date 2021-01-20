@@ -6,34 +6,34 @@ section {
 }
 
 section h1 {
-  width : 100%;
+  width: 100%;
   text-align: center;
   background-color: dodgerblue;
   color: white;
-  height : 70px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-input[type=text]{
+input[type='text'] {
   margin-top: 5px;
   margin-bottom: 5px;
-  padding : 10px;
-  border : 2px solid black;
+  padding: 10px;
+  border: 2px solid black;
   border-radius: 5px;
 }
 
 .btn {
   text-align: center;
-  color : white;
-  padding :15px;
-  padding-left : 30px;
+  color: white;
+  padding: 15px;
+  padding-left: 30px;
   padding-right: 30px;
-  border : 2px black solid;
+  border: 2px black solid;
   -webkit-box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0.75);
-  -moz-box-shadow:    3px 3px 5px 0px rgba(50, 50, 50, 0.75);
-  box-shadow:         3px 3px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0.75);
   cursor: pointer;
   font-weight: bold;
   border-radius: 5px;
@@ -41,13 +41,14 @@ input[type=text]{
 
 .loading_modal {
   position: fixed;
-  display : flex;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width : 100%;
+  width: 100%;
   height: 100%;
-  left : 0;
-  top : 0;
+  left: 0;
+  top: 0;
   background-color: rgba(0, 0, 0, 0.5);
 }
 

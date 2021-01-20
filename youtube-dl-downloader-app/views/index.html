@@ -35,11 +35,21 @@
       <div></div>
       <div></div>
     </div>
+    <div id="download_check" style="color : white; font-weight: bold;">
+      <div>Loading...</div>
+    </div>
   </div>
 </body>
 <script>
   let mp4_link = document.querySelector("#mp4_download_link");
   let mp3_link = document.querySelector("#mp3_download_link");
+
+  // test for in window
+  if ( window.android == undefined ){
+    console.log("test");
+    var app = {};
+    app.getPath = function(){ return 'window-test'; }
+  }
 
   function download() {
     let data;
@@ -54,7 +64,6 @@
       }
       // send link storage|mp4|mp3
       data = app.getPath('movies') + "|" + app.getPath('music') + "|" + mp4_link.value + "|" + mp3_link.value;
-      loading_modal('on');
       front.send('download-mp34', data);
       return;
     }
@@ -64,7 +73,6 @@
         return;
       }
       data = app.getPath('movies') + "|" + mp4_link.value;
-      loading_modal('on');
       front.send('download-mp4', data);
       return;
     }
@@ -74,7 +82,6 @@
         return;
       }
       data = app.getPath('music') + "|" + mp3_link.value;
-      loading_modal('on');
       front.send('download-mp3', data);
       return;
     }
@@ -100,6 +107,10 @@
       i.value = '';
     });
   }
+
+  front.on('download-start', (msg)=>{
+    loading_modal('on');
+  })
 
   front.on('error-log', (msg)=>{
     alert(`error : ${msg}`);
